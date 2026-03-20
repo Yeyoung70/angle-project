@@ -1,0 +1,97 @@
+/* 전시 카드 그리드 레이아웃 */
+.exhibition-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 3rem;
+  margin-top: 8rem; /* 메인 이미지와 간격을 넉넉히 줬습니다 */
+  margin-bottom: 5rem;
+}
+
+.exhibition-card {
+  text-align: left;
+  transition: all 0.4s ease;
+  cursor: pointer;
+}
+
+.exhibition-card:hover {
+  opacity: 0.7; /* 마우스 올리면 살짝 흐려지는 미니멀한 효과 */
+}
+
+.card-image-placeholder {
+  width: 100%;
+  aspect-ratio: 16 / 9; /* 가로가 긴 세련된 비율 */
+  background-color: #e8e8e8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.preview-text {
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  color: #aaa;
+}
+
+.card-info .category {
+  font-size: 0.75rem;
+  color: #888;
+  text-transform: uppercase;
+}
+
+.card-info .card-title {
+  font-size: 1.25rem;
+  margin: 0.5rem 0;
+  font-weight: 500;
+}
+
+.footer {
+  padding: 4rem 0 2rem;
+  border-top: 1px solid #eee;
+  font-size: 0.8rem;
+  color: #999;
+  text-align: center;
+}
+
+/* 메인 이미지 스타일 */
+.main-image-wrapper {
+  width: 100%;
+  margin-top: 3rem;
+  overflow: hidden; /* 혹시 이미지가 넘치면 잘라줍니다 */
+  border-radius: 4px; /* 살짝 부드러운 모서리 */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1); /* 미세한 그림자 효과 */
+}
+
+.main-image {
+  width: 100%; /* 부모 너비에 딱 맞춥니다 */
+  height: auto; /* 비율을 유지합니다 */
+  display: block; /* 이미지 아래 생기는 미세한 공백 제거 */
+  transition: transform 0.5s ease; /* 나중에 호버 효과를 위해 */
+}
+
+/* 마우스를 올리면 이미지가 살짝 확대되는 세련된 효과 */
+.main-image-wrapper:hover .main-image {
+  transform: scale(1.03);
+}
+
+/* 전시 카드 이미지 스타일 */
+.exhibition-card .main-image-wrapper {
+  overflow: hidden; /* 혹시 이미지가 넘치면 잘라줍니다 */
+  border-radius: 4px; /* 살짝 부드러운 모서리 */
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05); /* 미세한 그림자 효과 */
+  margin-bottom: 1.5rem;
+  aspect-ratio: 16 / 9; /* 가로가 긴 세련된 비율 */
+}
+
+.exhibition-card .main-image {
+  width: 100%; /* 부모 너비에 딱 맞춥니다 */
+  height: 100%; /* 부모 높이에 딱 맞춥니다 */
+  object-fit: cover; /* 비율을 유지하며 부모 요소를 꽉 채웁니다 */
+  display: block; /* 이미지 아래 생기는 미세한 공백 제거 */
+  transition: transform 0.5s ease; /* 나중에 호버 효과를 위해 */
+}
+
+/* 마우스를 올리면 이미지가 살짝 확대되는 세련된 효과 */
+.exhibition-card .main-image-wrapper:hover .main-image {
+  transform: scale(1.05);
+}
