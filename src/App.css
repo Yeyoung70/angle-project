@@ -1,200 +1,202 @@
-/* 전시 카드 그리드 레이아웃 */
-.exhibition-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 3rem;
-  margin-top: 8rem; /* 메인 이미지와 간격을 넉넉히 줬습니다 */
-  margin-bottom: 5rem;
+/* 1. 기본 폰트와 배경 */
+:root {
+  --bg-color: #ffffff;
+  --text-primary: #111111;
+  --text-secondary: #888888;
+  --spacing-unit: 100px;
 }
 
-.exhibition-card {
-  text-align: left;
-  transition: all 0.4s ease;
-  cursor: pointer;
+body {
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  font-family: 'Inter', 'Noto Sans KR', sans-serif; /* 깔끔한 고딕 */
+  letter-spacing: -0.02em;
+  margin: 0;
 }
 
-.exhibition-card:hover {
-  opacity: 0.7; /* 마우스 올리면 살짝 흐려지는 미니멀한 효과 */
-}
-
-.card-image-placeholder {
-  width: 100%;
-  aspect-ratio: 16 / 9; /* 가로가 긴 세련된 비율 */
-  background-color: #e8e8e8;
+/* 2. 상단 네비게이션 (아주 얇고 넓게) */
+.navbar {
+  padding: 1.5rem 4rem;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #f0f0f0;
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 100;
 }
 
-.preview-text {
+.logo {
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: 4px; /* 로고 자간을 넓히면 명품 느낌이 납니다 */
+}
+
+.menu {
   font-size: 0.7rem;
-  letter-spacing: 2px;
-  color: #aaa;
-}
-
-.card-info .category {
-  font-size: 0.75rem;
-  color: #888;
-  text-transform: uppercase;
-}
-
-.card-info .card-title {
-  font-size: 1.25rem;
-  margin: 0.5rem 0;
   font-weight: 500;
+  letter-spacing: 2px;
+  gap: 40px;
+  display: flex;
 }
 
-.footer {
-  padding: 4rem 0 2rem;
-  border-top: 1px solid #eee;
-  font-size: 0.8rem;
-  color: #999;
+/* 3. 히어로 섹션 (이미지를 꽉 채우거나 아주 크게) */
+.hero-section {
+  padding: 120px 4rem;
   text-align: center;
 }
 
-/* 메인 이미지 스타일 */
+.main-title {
+  font-size: 5rem; /* 제목은 압도적으로 크게 */
+  font-weight: 300;
+  margin-bottom: 2rem;
+  font-family: serif; /* 제목만 명조체로 바꾸면 고급스러워요 */
+}
+
+.sub-title {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  color: var(--text-secondary);
+}
+
+/* App.css의 .main-image-wrapper 수정 */
 .main-image-wrapper {
-  width: 100%;
-  margin-top: 3rem;
-  overflow: hidden; /* 혹시 이미지가 넘치면 잘라줍니다 */
-  border-radius: 4px; /* 살짝 부드러운 모서리 */
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1); /* 미세한 그림자 효과 */
+  margin: 60px auto 100px; /* 위아래 간격 줄임 */
+  max-width: 800px; /* ★ 아주 크게 1400px였던 것을 800px로 줄입니다. ★ */
+  padding: 0 4rem; /* 양옆 여백 추가 */
+  box-shadow: none;
 }
 
+/* 이미지가 wrapper 안에서 꽉 차도록 유지 */
 .main-image {
-  width: 100%; /* 부모 너비에 딱 맞춥니다 */
-  height: auto; /* 비율을 유지합니다 */
-  display: block; /* 이미지 아래 생기는 미세한 공백 제거 */
-  transition: transform 0.5s ease; /* 나중에 호버 효과를 위해 */
+  width: 100%;
+  height: auto;
+  object-fit: contain; /* 비율 유지하며 중앙 배치 */
+  border: 1px solid #f0f0f0; /* 미세한 테두리로 액자 효과 (선택사항) */
 }
 
-/* 마우스를 올리면 이미지가 살짝 확대되는 세련된 효과 */
-.main-image-wrapper:hover .main-image {
-  transform: scale(1.03);
+/* 4. 전시 그리드 (여백을 아주 넓게) */
+.exhibition-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 3개보다 2개가 더 시원해 보입니다 */
+  gap: 8rem 4rem;
+  padding: 0 4rem 200px;
 }
 
-/* 전시 카드 이미지 스타일 */
-.exhibition-card .main-image-wrapper {
-  overflow: hidden; /* 혹시 이미지가 넘치면 잘라줍니다 */
-  border-radius: 4px; /* 살짝 부드러운 모서리 */
-  box-shadow: 0 5px 15px rgba(0,0,0,0.05); /* 미세한 그림자 효과 */
-  margin-bottom: 1.5rem;
-  aspect-ratio: 16 / 9; /* 가로가 긴 세련된 비율 */
+.exhibition-card {
+  cursor: pointer;
 }
 
-.exhibition-card .main-image {
-  width: 100%; /* 부모 너비에 딱 맞춥니다 */
-  height: 100%; /* 부모 높이에 딱 맞춥니다 */
-  object-fit: cover; /* 비율을 유지하며 부모 요소를 꽉 채웁니다 */
-  display: block; /* 이미지 아래 생기는 미세한 공백 제거 */
-  transition: transform 0.5s ease; /* 나중에 호버 효과를 위해 */
+/* App.css의 .card-image-wrapper 수정 */
+.card-image-wrapper {
+  aspect-ratio: 3 / 4; /* ★ 4/5(긴 세로) 비율을 16/9(시원한 가로)로 변경 ★ */
+  max-width: 600px; /* 카드 이미지 자체의 최대 너비 제한 (선택사항) */
+  margin: 0 auto 2rem; /* 카드를 중앙 정렬 */
+  overflow: hidden;
+  background-color: #f9f9f9;
 }
 
-/* 마우스를 올리면 이미지가 살짝 확대되는 세련된 효과 */
-.exhibition-card .main-image-wrapper:hover .main-image {
-  transform: scale(1.05);
+.card-title {
+  font-size: 1.2rem;
+  font-family: serif;
+  margin-bottom: 0.5rem;
 }
 
+.category {
+  font-size: 0.65rem;
+  letter-spacing: 2px;
+  color: #999;
+}
 
-/* 모달 오버레이 (배경 어둡게) */
+/* App.css의 .card-image-wrapper 수정 */
+.card-image-wrapper {
+  aspect-ratio: 3 / 4; /* ★ 4/5(긴 세로) 비율을 16/9(시원한 가로)로 변경 ★ */
+  max-width: 600px; /* 카드 이미지 자체의 최대 너비 제한 (선택사항) */
+  margin: 0 auto 2rem; /* 카드를 중앙 정렬 */
+  overflow: hidden;
+  background-color: #f9f9f9;
+}
+
+/* --- 모달 시스템 (이 부분이 있어야 위로 뜹니다) --- */
+
 .modal-overlay {
-  position: fixed;
+  position: fixed; /* 화면에 고정 */
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.65);
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6); /* 배경 어둡게 */
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000; /* 가장 위에 뜨도록 */
+  z-index: 9999; /* 최상단으로 올리기 */
   cursor: pointer;
 }
 
-/* 모달 콘텐츠 박스 */
 .modal-content {
-  background-color: #fff;
-  padding: 3rem;
-  border-radius: 4px;
-  max-width: 900px;
-  width: 90%;
   position: relative;
+  background-color: #fff;
+  width: 90vw;
+  max-width: 1100px;
+  height: 80vh;
+  display: flex;
+  overflow: hidden;
   cursor: default;
-  overflow-y: auto; /* 내용이 많으면 스크롤 */
-  max-height: 90vh;
+  animation: modalFadeIn 0.4s ease-out;
 }
 
-/* 닫기 버튼 */
-.modal-close {
-  position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: #dadada;
+@keyframes modalFadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-/* 모달 내부 레이아웃 */
 .modal-body {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* 이미지와 텍스트를 반반씩 */
-  gap: 3rem;
-  align-items: start;
+  grid-template-columns: 1.1fr 0.9fr; /* 이미지와 텍스트 반반 */
+  width: 100%;
+  height: 100%;
 }
 
-/* 상세 이미지 */
 .modal-image {
   width: 100%;
-  height: auto;
-  border-radius: 2px;
+  height: 100%;
+  object-fit: cover;
 }
 
-/* 상세 텍스트 영역 */
 .modal-text {
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   text-align: left;
+  overflow-y: auto;
 }
 
-.modal-text .category {
-  font-size: 0.8rem;
-  color: #888;
-  text-transform: uppercase;
+/* 닫기 버튼 스타일 */
+.modal-close {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  z-index: 10;
 }
 
-.modal-title {
-  font-size: 2.5rem;
-  margin: 1rem 0;
-  font-weight: 500;
-  letter-spacing: -1px;
-}
-
-.modal-date {
-  font-size: 1rem;
-  color: #666;
-  margin-bottom: 2rem;
-}
-
-.modal-description {
-  font-size: 1.1rem;
-  line-height: 1.8;
-  color: #333;
-}
-
-/* 2. 모바일 대응 (반드시 기본 설정보다 아래에 위치!) */
+/* 모바일 대응 (반응형) */
 @media (max-width: 768px) {
   .modal-content {
-    padding: 2rem 1.5rem;
-    width: 95%;
+    flex-direction: column;
+    height: 90vh;
   }
-
   .modal-body {
-    grid-template-columns: 1fr; /* 폰에서는 위아래로 1줄만 */
-    gap: 1.5rem;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
   }
-
-  .modal-title {
-    font-size: 1.8rem;
+  .modal-text {
+    padding: 2rem;
   }
 }
