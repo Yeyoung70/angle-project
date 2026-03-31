@@ -1,202 +1,113 @@
-/* 1. 기본 폰트와 배경 */
+/* App.css - 메인 강조형 레이아웃 */
+
 :root {
-  --bg-color: #ffffff;
-  --text-primary: #111111;
-  --text-secondary: #888888;
-  --spacing-unit: 100px;
+  --padding-side: 40px;
+  --padding-top: 40px;
 }
 
 body {
-  background-color: var(--bg-color);
-  color: var(--text-primary);
-  font-family: 'Inter', 'Noto Sans KR', sans-serif; /* 깔끔한 고딕 */
-  letter-spacing: -0.02em;
   margin: 0;
+  background-color: #f2f2f2;
+  font-family: 'Inter', sans-serif;
+  color: #000;
 }
 
-/* 2. 상단 네비게이션 (아주 얇고 넓게) */
-.navbar {
-  padding: 1.5rem 4rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #f0f0f0;
-  position: sticky;
-  top: 0;
-  background: #fff;
+/* App.css - 상단 절대 위치 고정 */
+
+.fixed-interface {
+  /* fixed 대신 absolute를 사용하여 페이지 맨 위에 고정합니다. */
+  /* 스크롤을 내리면 사진과 함께 위로 올라갑니다. */
+  position: absolute; 
+  top: var(--padding-top);
+  left: var(--padding-side);
   z-index: 100;
+  width: auto;
 }
 
 .logo {
-  font-size: 1.2rem;
-  font-weight: 800;
-  letter-spacing: 4px; /* 로고 자간을 넓히면 명품 느낌이 납니다 */
+  display: block;
+  font-size: 14px;
+  font-weight: 600; /* 조금 더 또렷하게 */
+  margin-bottom: 30px;
+  text-decoration: none;
+  color: #000;
+  letter-spacing: 0.05em;
 }
 
-.menu {
-  font-size: 0.7rem;
-  font-weight: 500;
-  letter-spacing: 2px;
-  gap: 40px;
-  display: flex;
-}
-
-/* 3. 히어로 섹션 (이미지를 꽉 채우거나 아주 크게) */
-.hero-section {
-  padding: 120px 4rem;
-  text-align: center;
-}
-
-.main-title {
-  font-size: 5rem; /* 제목은 압도적으로 크게 */
-  font-weight: 300;
-  margin-bottom: 2rem;
-  font-family: serif; /* 제목만 명조체로 바꾸면 고급스러워요 */
-}
-
-.sub-title {
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 5px;
-  color: var(--text-secondary);
-}
-
-/* App.css의 .main-image-wrapper 수정 */
-.main-image-wrapper {
-  margin: 60px auto 100px; /* 위아래 간격 줄임 */
-  max-width: 800px; /* ★ 아주 크게 1400px였던 것을 800px로 줄입니다. ★ */
-  padding: 0 4rem; /* 양옆 여백 추가 */
-  box-shadow: none;
-}
-
-/* 이미지가 wrapper 안에서 꽉 차도록 유지 */
-.main-image {
-  width: 100%;
-  height: auto;
-  object-fit: contain; /* 비율 유지하며 중앙 배치 */
-  border: 1px solid #f0f0f0; /* 미세한 테두리로 액자 효과 (선택사항) */
-}
-
-/* 4. 전시 그리드 (여백을 아주 넓게) */
-.exhibition-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr; /* 3개보다 2개가 더 시원해 보입니다 */
-  gap: 8rem 4rem;
-  padding: 0 4rem 200px;
-}
-
-.exhibition-card {
-  cursor: pointer;
-}
-
-/* App.css의 .card-image-wrapper 수정 */
-.card-image-wrapper {
-  aspect-ratio: 3 / 4; /* ★ 4/5(긴 세로) 비율을 16/9(시원한 가로)로 변경 ★ */
-  max-width: 600px; /* 카드 이미지 자체의 최대 너비 제한 (선택사항) */
-  margin: 0 auto 2rem; /* 카드를 중앙 정렬 */
-  overflow: hidden;
-  background-color: #f9f9f9;
-}
-
-.card-title {
-  font-size: 1.2rem;
-  font-family: serif;
-  margin-bottom: 0.5rem;
-}
-
-.category {
-  font-size: 0.65rem;
-  letter-spacing: 2px;
-  color: #999;
-}
-
-/* App.css의 .card-image-wrapper 수정 */
-.card-image-wrapper {
-  aspect-ratio: 3 / 4; /* ★ 4/5(긴 세로) 비율을 16/9(시원한 가로)로 변경 ★ */
-  max-width: 600px; /* 카드 이미지 자체의 최대 너비 제한 (선택사항) */
-  margin: 0 auto 2rem; /* 카드를 중앙 정렬 */
-  overflow: hidden;
-  background-color: #f9f9f9;
-}
-
-/* --- 모달 시스템 (이 부분이 있어야 위로 뜹니다) --- */
-
-.modal-overlay {
-  position: fixed; /* 화면에 고정 */
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.6); /* 배경 어둡게 */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999; /* 최상단으로 올리기 */
-  cursor: pointer;
-}
-
-.modal-content {
-  position: relative;
-  background-color: #fff;
-  width: 90vw;
-  max-width: 1100px;
-  height: 80vh;
-  display: flex;
-  overflow: hidden;
-  cursor: default;
-  animation: modalFadeIn 0.4s ease-out;
-}
-
-@keyframes modalFadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.modal-body {
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr; /* 이미지와 텍스트 반반 */
-  width: 100%;
-  height: 100%;
-}
-
-.modal-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.modal-text {
-  padding: 4rem;
+.nav-menu {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  text-align: left;
-  overflow-y: auto;
+  gap: 5px;
 }
 
-/* 닫기 버튼 스타일 */
-.modal-close {
+.nav-menu a {
+  font-size: 12px;
+  text-decoration: none;
+  color: #999;
+  transition: color 0.2s;
+}
+
+.nav-menu a.active, .nav-menu a:hover {
+  color: #000;
+}
+
+/* 1. 메인 사진 (Hero) 수정 */
+.hero-item {
+  width: 100%;
+  max-width: 2000px; /* ★ 너무 무한정 커지지 않게 제한 (선택) */
+  /* margin: 0 auto 150px; ★ auto를 넣어 중앙으로 보냅니다 */
+  /* padding: 0 var(--padding-side); 좌측 메뉴와 겹치지 않게 여백 추가 */
+  box-sizing: border-box;
+}
+
+.hero-image {
+  width: 100%;
+  height: auto; /* ★ 고정 높이(90vh) 대신 비율에 맞게 조절되도록 */
+  max-height: 90vh; /* 너무 길어지지 않게 최대치만 설정 */
+  object-fit: cover;
+  display: block;
+}
+
+/* 2. 좌측 메뉴 (인터페이스) 위치 조정 */
+.fixed-interface {
   position: absolute;
-  top: 2rem;
-  right: 2rem;
-  background: none;
-  border: none;
-  font-size: 1.2rem;
-  cursor: pointer;
-  z-index: 10;
+  top: var(--padding-top);
+  left: var(--padding-side);
+  z-index: 100;
+  /* 만약 메뉴가 사진을 가리는 게 싫다면, 
+     위 hero-item의 padding-top을 조절하거나 
+     메뉴 위치를 살짝 피해서 배치하면 됩니다. */
 }
 
-/* 모바일 대응 (반응형) */
-@media (max-width: 768px) {
-  .modal-content {
-    flex-direction: column;
-    height: 90vh;
-  }
-  .modal-body {
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
-  }
-  .modal-text {
-    padding: 2rem;
-  }
+/* 만약 메뉴가 사진 '위'에 겹치는 게 싫다면 hero-image에 margin-top을 주면 됩니다. 
+   지금은 사진 위에 글자가 툭 얹어진 느낌을 유지하기 위해 그대로 둡니다. */
+
+/* ★ 아래로 나열되는 작은 사진들 (Sub) ★ */
+.sub-items-wrapper {
+  padding: 0 var(--padding-side) 200px;
+  max-width: 900px; /* 사진들이 너무 커지지 않게 제한 */
+  margin-left: auto; /* 우측 정렬 느낌 혹은 중앙 */
+  margin-right: auto;
+}
+
+.sub-item {
+  margin-bottom: 80px;
+}
+
+.sub-image {
+  width: 100%; /* wrapper의 너비(900px)를 따라감 */
+  height: auto;
+  display: block;
+}
+
+.image-info {
+  margin-top: 20px;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #555;
+}
+
+.info-dash {
+  display: block;
+  margin-bottom: 15px;
 }
