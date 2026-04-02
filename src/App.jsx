@@ -34,10 +34,19 @@ function App() {
 
     return (
       <div className="image-list-container">
-        {/* 1. 메인 큰 사진 */}
+        {/* 메인 섹션에 사진 대신 영상 넣기 */}
         <section className="hero-item">
-          <img src={hero.img} alt={hero.title} className="hero-image" />
-          <div className="image-info">
+          <video 
+            className="hero-image" 
+            autoPlay 
+            muted 
+            loop 
+            playsInline
+          >
+            <source src="craft_W.mp4" type="video/mp4" />
+            브라우저가 비디오를 지원하지 않습니다.
+          </video>
+          <div className="image-info" style={{padding: '30px 40px'}}>
             <span className="info-dash">—</span>
             <strong>{hero.title}</strong>, {hero.date}, {hero.description}
           </div>
