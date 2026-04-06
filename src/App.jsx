@@ -1,91 +1,122 @@
-import { Routes, Route, Link, useLocation } from 'react-router-dom';
+import { useState } from 'react';
+import { Routes, Route, Link } from 'react-router-dom';
 import './App.css';
 
-const archiveData = [
-  { 
-    id: 1, 
-    img: 'angle_001.png', 
-    title: 'Super Natural Voices', 
-    description: 'Installation view, Mono Lisboa, Lisbon',
-    date: '2026'
-  },
-  { 
-    id: 2, 
-    img: 'angle_002.png', 
-    title: 'The Missing Angle #01', 
-    description: 'Virtual Archaeology Archive',
-    date: '2026'
-  },
-  { 
-    id: 3, 
-    img: 'angle_003.png', 
-    title: 'Korean Aesthetic in Meta', 
-    description: 'Digital Restoration Project',
-    date: '2026'
-  }
-];
-
 function App() {
-  const location = useLocation();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const Home = () => {
-    // 첫 번째 데이터와 나머지 데이터를 나눕니다.
-    const [hero, ...subs] = archiveData;
+  const Home = () => (
+    <main>
+      {/* 디올 스타일 메인 비주얼 */}
+      <section className="hero-section">
+        <video className="hero-video" autoPlay muted loop playsInline>
+          <source src="/dormant_W1.mp4" type="video/mp4" />
+        </video>
+        <div className="hero-overlay">
+          <p style={{fontSize: '12px', letterSpacing: '0.2em'}}>AGLE 2026 COLLECTION</p>
+          <h1 className="hero-title">THE MISSING ANGLE</h1>
+          <button style={{background: 'none', border: '1px solid #fff', color: '#fff', padding: '10px 30px', cursor: 'pointer'}}>더 알아보기</button>
+        </div>
+      </section>
 
-    return (
-      <div className="image-list-container">
-        {/* 메인 섹션에 사진 대신 영상 넣기 */}
-        <section className="hero-item">
-          <video 
-            className="hero-image" 
-            autoPlay 
-            muted 
-            loop 
-            playsInline
-          >
-            <source src="craft_W.mp4" type="video/mp4" />
-            브라우저가 비디오를 지원하지 않습니다.
-          </video>
-          <div className="image-info" style={{padding: '30px 40px'}}>
-            <span className="info-dash">—</span>
-            <strong>{hero.title}</strong>, {hero.date}, {hero.description}
-          </div>
-        </section>
-
-        {/* 2. 아래로 나열되는 작은 사진들 */}
-        <section className="sub-items-wrapper">
-          {subs.map((item) => (
-            <div key={item.id} className="sub-item">
-              <img src={item.img} alt={item.title} className="sub-image" />
-              <div className="image-info">
-                <span className="info-dash">—</span>
-                <strong>{item.title}</strong>, {item.date}, {item.description}
-              </div>
-            </div>
-          ))}
-        </section>
-      </div>
-    );
-  };
+      {/* 하단 그리드 섹션 */}
+      <section className="grid-container">
+        <div className="grid-item"><img src="/angle_002.png" alt="1" /></div>
+        <div className="grid-item"><img src="/angle_003.png" alt="2" /></div>
+      </section>
+    </main>
+  );
 
   return (
     <div className="app-container">
-      <div className="fixed-interface">
-        <Link to="/" className="logo">AGLE</Link>
-        <nav className="nav-menu">
-          <Link to="/" className={location.pathname === '/' ? 'active' : ''}>Selected Work</Link>
-          <Link to="/about" className={location.pathname === '/about' ? 'active' : ''}>Information</Link>
-          <Link to="/contact" className={location.pathname === '/contact' ? 'active' : ''}>Contact</Link>
-        </nav>
+      {/* 상단 헤더 */}
+      <header className="header">
+        <div className="nav-left" onClick={() => setIsMenuOpen(true)}>
+          MENU
+        </div>
+        
+        <Link to="/" className="logo-center">AGLE</Link>
+        
+        <div className="nav-right">
+          <span>SEARCH</span>
+          <span>ACCOUNT</span>
+          <span>CART</span>
+        </div>
+      </header>
+
+      {/* 왼쪽에서 나오는 사이드 메뉴 */}
+      <div className={`side-menu ${isMenuOpen ? 'open' : ''}`}>
+        <div style={{textAlign: 'right', cursor: 'pointer', marginBottom: '40px'}} onClick={() => setIsMenuOpen(false)}>CLOSE ✕</div>
+        <Link to="/" className="side-menu-item" onClick={() => setIsMenuOpen(false)}>NEW</Link>
+        <Link to="/archive" className="side-menu-item" onClick={() => setIsMenuOpen(false)}>ARCHIVE</Link>
+        <Link to="/exhibition" className="side-menu-item" onClick={() => setIsMenuOpen(false)}>EXHIBITION</Link>
+        <Link to="/about" className="side-menu-item" onClick={() => setIsMenuOpen(false)}>ABOUT</Link>
+        
+        <div style={{marginTop: '100px', fontSize: '12px', color: '#888'}}>
+          <p>infomation</p>
+          <p>contact</p>
+        </div>
       </div>
 
-      <main>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<div style={{padding: '200px 40px'}}><h1>Information</h1></div>} />
-        </Routes>
-      </main>
+      {/* 메뉴 열렸을 때 배경 어둡게 */}
+      <div className={`menu-overlay ${isMenuOpen ? 'active' : ''}`} onClick={() => setIsMenuOpen(false)}></div>
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/archive" element={<div style={{paddingTop: '100px'}}>Archive Page</div>} />
+      </Routes>
+      
+      <footer className="footer">
+        <div className="footer-container">
+          <div className="footer-column">
+            <h4>NEWSLETTER</h4>
+            <p style={{fontSize: '12px', color: '#666', lineHeight: '1.6'}}>
+              AGLE의 최신 소식과 독점 콘텐츠를 받아보세요.
+            </p>
+          </div>
+          <div className="footer-column">
+            <h4>CONTACT</h4>
+            <ul>
+              <li>고객센터</li>
+              <li>FAQ</li>
+              <li>부티크 찾기</li>
+            </ul>
+          </div>
+          <div className="footer-column">
+            <h4>SERVICES</h4>
+            <ul>
+              <li>배송 및 반품</li>
+              <li>선물 포장 서비스</li>
+              <li>가상 아카이브 투어</li>
+            </ul>
+          </div>
+          <div className="footer-column">
+            <h4>THE HOUSE</h4>
+            <ul>
+              <li>가상 고고학이란?</li>
+              <li>채용 정보</li>
+              <li>지속 가능성</li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="footer-bottom">
+          <div className="legal-info">
+            <p>상호명: AGLE (The Missing Angle) | 대표자: [예영] | 사업자등록번호: 000-00-00000</p>
+            <p>통신판매업신고: 제2026-서울-0000호 | 주소: 서울특별시 중구 답십리 (가상 고고학 연구소)</p>
+            <p>© 2026 AGLE. 모든 권리 보유. 이용약관 | 개인정보처리방침</p>
+          </div>
+          <div className="country-selector">
+            대한민국 (한국어)
+          </div>
+        </div>
+      </footer>
+
     </div>
+
+    
+
+    
   );
 }
 

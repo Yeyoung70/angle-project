@@ -1,113 +1,212 @@
-/* App.css - 메인 강조형 레이아웃 */
+/* App.css - Dior Inspired Layout */
 
 :root {
-  --padding-side: 40px;
-  --padding-top: 40px;
+  --nav-height: 70px;
 }
 
 body {
   margin: 0;
-  background-color: #f2f2f2;
   font-family: 'Inter', sans-serif;
-  color: #000;
+  background-color: #fff;
 }
 
-/* App.css - 상단 절대 위치 고정 */
-
-.fixed-interface {
-  /* fixed 대신 absolute를 사용하여 페이지 맨 위에 고정합니다. */
-  /* 스크롤을 내리면 사진과 함께 위로 올라갑니다. */
-  position: absolute; 
-  top: var(--padding-top);
-  left: var(--padding-side);
-  z-index: 100;
-  width: auto;
-}
-
-.logo {
-  display: block;
-  font-size: 14px;
-  font-weight: 600; /* 조금 더 또렷하게 */
-  margin-bottom: 30px;
-  text-decoration: none;
-  color: #000;
-  letter-spacing: 0.05em;
-}
-
-.nav-menu {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.nav-menu a {
-  font-size: 12px;
-  text-decoration: none;
-  color: #999;
-  transition: color 0.2s;
-}
-
-.nav-menu a.active, .nav-menu a:hover {
-  color: #000;
-}
-
-/* 1. 메인 사진 (Hero) 수정 */
-.hero-item {
+/* 1. 상단 네비게이션 (Dior 스타일) */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  max-width: 2000px; /* ★ 너무 무한정 커지지 않게 제한 (선택) */
-  /* margin: 0 auto 150px; ★ auto를 넣어 중앙으로 보냅니다 */
-  /* padding: 0 var(--padding-side); 좌측 메뉴와 겹치지 않게 여백 추가 */
+  height: var(--nav-height);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+  background-color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(5px);
+  z-index: 1000;
+  border-bottom: 1px solid #eee;
   box-sizing: border-box;
 }
 
-.hero-image {
-  width: 100%;
-  height: auto; /* ★ 고정 높이(90vh) 대신 비율에 맞게 조절되도록 */
-  max-height: 90vh; /* 너무 길어지지 않게 최대치만 설정 */
-  object-fit: cover;
-  display: block;
-}
-
-/* 2. 좌측 메뉴 (인터페이스) 위치 조정 */
-.fixed-interface {
-  position: absolute;
-  top: var(--padding-top);
-  left: var(--padding-side);
-  z-index: 100;
-  /* 만약 메뉴가 사진을 가리는 게 싫다면, 
-     위 hero-item의 padding-top을 조절하거나 
-     메뉴 위치를 살짝 피해서 배치하면 됩니다. */
-}
-
-/* 만약 메뉴가 사진 '위'에 겹치는 게 싫다면 hero-image에 margin-top을 주면 됩니다. 
-   지금은 사진 위에 글자가 툭 얹어진 느낌을 유지하기 위해 그대로 둡니다. */
-
-/* ★ 아래로 나열되는 작은 사진들 (Sub) ★ */
-.sub-items-wrapper {
-  padding: 0 var(--padding-side) 200px;
-  max-width: 900px; /* 사진들이 너무 커지지 않게 제한 */
-  margin-left: auto; /* 우측 정렬 느낌 혹은 중앙 */
-  margin-right: auto;
-}
-
-.sub-item {
-  margin-bottom: 80px;
-}
-
-.sub-image {
-  width: 100%; /* wrapper의 너비(900px)를 따라감 */
-  height: auto;
-  display: block;
-}
-
-.image-info {
-  margin-top: 20px;
+.nav-left, .nav-right {
+  display: flex;
+  gap: 25px;
   font-size: 12px;
-  line-height: 1.6;
-  color: #555;
+  letter-spacing: 0.1em;
+  font-weight: 400;
+  cursor: pointer;
 }
 
-.info-dash {
+.logo-center {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-decoration: none;
+  color: #000;
+}
+
+/* 2. 메인 비주얼 (Hero) */
+.hero-section {
+  position: relative;
+  width: 100%;
+  height: 95vh; /* 디올처럼 아래쪽이 살짝 보이게 */
+  margin-top: 0;
+  overflow: hidden;
+}
+
+.hero-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #fff;
+}
+
+.hero-title {
+  font-size: 42px;
+  font-weight: 300;
+  letter-spacing: 0.3em;
+  margin-bottom: 20px;
+}
+
+/* 3. 왼쪽 사이드 메뉴 (Drawer) */
+.side-menu {
+  position: fixed;
+  top: 0;
+  left: -350px; /* 100% 대신 구체적인 너비값으로 고정하는 게 안전합니다 */
+  width: 350px;
+  height: 100vh;
+  background: #fff;
+  z-index: 2000;
+  transition: 0.4s ease-in-out;
+  padding: 60px 40px;
+  box-shadow: 10px 0 30px rgba(0,0,0,0.05);
+  /* ★ 아래 속성 추가 ★ */
+  visibility: hidden; 
+}
+
+.side-menu.open {
+  left: 0;
+  visibility: visible; /* 열릴 때만 보이게 */
+}
+
+.side-menu-item {
   display: block;
-  margin-bottom: 15px;
+  font-size: 18px;
+  margin-bottom: 25px;
+  text-decoration: none;
+  color: #000;
+  font-weight: 300;
+  border-bottom: 1px solid #f5f5f5;
+  padding-bottom: 10px;
+}
+
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.3);
+  z-index: 1500;
+  display: none;
+}
+
+.menu-overlay.active {
+  display: block;
+}
+
+/* 4. 그리드 섹션 */
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding: 20px;
+}
+
+.grid-item img {
+  width: 100%;
+  height: auto;
+}
+
+/* App.css - Dior Style Footer */
+
+.footer {
+  background-color: #fff;
+  border-top: 1px solid #eee;
+  padding: 80px 40px 40px;
+  margin-top: 100px;
+}
+
+.footer-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4단 구성 */
+  gap: 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.footer-column h4 {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 25px;
+  letter-spacing: 0.1em;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-column ul li {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.footer-column ul li:hover {
+  color: #000;
+}
+
+/* 최하단 법적 고지란 */
+.footer-bottom {
+  margin-top: 80px;
+  padding-top: 30px;
+  border-top: 1px solid #f5f5f5;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.legal-info {
+  font-size: 10px;
+  color: #999;
+  line-height: 1.8;
+  max-width: 700px;
+}
+
+.country-selector {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+@media (max-width: 768px) {
+  .footer-container {
+    grid-template-columns: 1fr 1fr; /* 모바일은 2단 */
+  }
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
 }
